@@ -4,6 +4,8 @@ const fs=require('fs');
 
 var app=express();
 
+const port=process.env.PORT||3000
+
 hbs.registerPartials(__dirname+'/views/partials');
 app.use(express.static(__dirname+'/public'))
 app.set('view engine','hbs');
@@ -22,9 +24,9 @@ app.use((req,res,next)=>{
   fs.appendFile('server.log',log+'\n',(err)=>{
     if(err){
       console.log('Unable to append to server.log');
-      
+
     }
-  });  
+  });
   next();
 })
 
@@ -55,6 +57,6 @@ app.get('/bad',(req, res)=>{
 
 
 
-app.listen(3000,()=>{
+app.listen(port,()=>{
   console.log('Server started on port 3000');
 });
